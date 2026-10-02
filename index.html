@@ -1,0 +1,574 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tanisha's Birthday Surprise 🎂</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:"Trebuchet MS", Arial, sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#8e44ad);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* ---------- COMMON ---------- */
+
+.screen{
+    width:100%;
+    min-height:100vh;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    padding:25px;
+    position:relative;
+    overflow:hidden;
+}
+
+.screen.active{
+    display:flex;
+}
+
+h1{
+    font-size:clamp(35px,7vw,75px);
+    margin-bottom:15px;
+    text-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+p{
+    font-size:20px;
+    max-width:650px;
+    line-height:1.7;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    padding:15px 32px;
+    border-radius:50px;
+    font-size:19px;
+    font-weight:bold;
+    color:#ff3d71;
+    background:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:.3s;
+    margin-top:25px;
+}
+
+button:hover{
+    transform:scale(1.1);
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.hidden{
+    display:none;
+}
+
+
+/* ---------- FALLING LOVE ---------- */
+
+.love{
+    position:absolute;
+    top:-80px;
+    font-size:35px;
+    animation:fall linear infinite;
+    opacity:.9;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:.2;
+    }
+}
+
+
+/* ---------- LOVE SCREEN ---------- */
+
+.bigLove{
+    font-size:clamp(100px,25vw,220px);
+    animation:heartBeat 1.2s infinite;
+    cursor:pointer;
+    filter:drop-shadow(0 15px 20px rgba(0,0,0,.25));
+}
+
+@keyframes heartBeat{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.18);
+    }
+}
+
+.clickText{
+    font-size:25px;
+    font-weight:bold;
+    margin-top:10px;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{opacity:.5;}
+}
+
+
+/* ---------- EGG ---------- */
+
+.egg{
+    width:180px;
+    height:230px;
+    background:linear-gradient(145deg,#fff,#ffe9ef);
+    border-radius:50% 50% 45% 45%;
+    cursor:pointer;
+    box-shadow:0 20px 40px rgba(0,0,0,.3);
+    position:relative;
+    animation:eggFloat 2s ease-in-out infinite;
+}
+
+@keyframes eggFloat{
+    0%,100%{transform:translateY(0) rotate(-3deg);}
+    50%{transform:translateY(-15px) rotate(3deg);}
+}
+
+.egg::after{
+    content:"🥚";
+    position:absolute;
+    font-size:130px;
+    left:25px;
+    top:40px;
+    display:none;
+}
+
+
+/* ---------- BABY ---------- */
+
+.baby{
+    font-size:150px;
+    animation:babyPop 1s ease-out;
+}
+
+@keyframes babyPop{
+    0%{
+        transform:scale(0) translateY(100px);
+    }
+    70%{
+        transform:scale(1.2);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+.name{
+    font-size:65px;
+    font-weight:bold;
+    color:#fff;
+    text-shadow:0 5px 20px rgba(0,0,0,.3);
+    animation:nameGlow 1.5s infinite alternate;
+}
+
+@keyframes nameGlow{
+    from{transform:scale(1);}
+    to{transform:scale(1.06);}
+}
+
+
+/* ---------- BIRTHDAY ---------- */
+
+.birthday{
+    background:
+    radial-gradient(circle at top,#ffd6e7 0%,transparent 35%),
+    linear-gradient(135deg,#7f00ff,#e100ff,#ff4b8b);
+}
+
+.cake{
+    font-size:130px;
+    animation:cakeBounce 1.2s infinite;
+}
+
+@keyframes cakeBounce{
+    50%{transform:translateY(-12px);}
+}
+
+.message{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:30px;
+    border-radius:25px;
+    max-width:750px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+
+/* ---------- TREAT ---------- */
+
+.treat{
+    background:linear-gradient(135deg,#ff9966,#ff5e62);
+}
+
+.chocolate{
+    font-size:120px;
+    animation:choco 1.5s infinite;
+}
+
+@keyframes choco{
+    0%,100%{transform:rotate(-5deg) scale(1);}
+    50%{transform:rotate(5deg) scale(1.12);}
+}
+
+.treatBox{
+    max-width:700px;
+    background:rgba(255,255,255,.18);
+    padding:35px;
+    border-radius:30px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.treatBox h2{
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.treatBox p{
+    font-size:21px;
+}
+
+.small{
+    font-size:15px;
+    margin-top:20px;
+    opacity:.8;
+}
+
+
+/* ---------- CONFETTI ---------- */
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-20px;
+    animation:confettiFall 3s linear forwards;
+    z-index:100;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= LOVE SCREEN ================= -->
+
+<section id="loveScreen" class="screen active">
+
+    <!-- Falling LOVE -->
+    <div class="love" style="left:5%;animation-duration:5s;">❤️ LOVE</div>
+    <div class="love" style="left:15%;animation-duration:7s;animation-delay:1s;">💗 LOVE</div>
+    <div class="love" style="left:27%;animation-duration:6s;animation-delay:2s;">💕 LOVE</div>
+    <div class="love" style="left:40%;animation-duration:8s;">❤️ LOVE</div>
+    <div class="love" style="left:53%;animation-duration:5.5s;animation-delay:1s;">💖 LOVE</div>
+    <div class="love" style="left:65%;animation-duration:7s;animation-delay:2s;">💗 LOVE</div>
+    <div class="love" style="left:78%;animation-duration:6s;">💕 LOVE</div>
+    <div class="love" style="left:90%;animation-duration:8s;animation-delay:1s;">❤️ LOVE</div>
+
+    <div class="bigLove" onclick="showEgg()">❤️</div>
+
+    <h1>LOVE</h1>
+
+    <div class="clickText">
+        👆 Click the LOVE
+    </div>
+
+</section>
+
+
+<!-- ================= EGG SCREEN ================= -->
+
+<section id="eggScreen" class="screen">
+
+    <h1>🥚 Something is hiding here...</h1>
+
+    <p>But first...</p>
+
+    <div class="egg" onclick="breakEgg()"></div>
+
+    <div class="clickText">
+        👆 Click the EGG
+    </div>
+
+</section>
+
+
+<!-- ================= BABY SCREEN ================= -->
+
+<section id="babyScreen" class="screen">
+
+    <div class="baby">👶</div>
+
+    <h1>It's a Baby! 🎉</h1>
+
+    <div class="name">TANISHA 💖</div>
+
+    <p>
+        Welcome to the world of this little surprise! 🥹💗
+    </p>
+
+    <button onclick="showBirthday()">
+        🎁 Click Another Surprise
+    </button>
+
+</section>
+
+
+<!-- ================= BIRTHDAY SCREEN ================= -->
+
+<section id="birthdayScreen" class="screen birthday">
+
+    <div class="cake">🎂</div>
+
+    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+
+    <div class="message">
+
+        <h2>Happy Birthday, Tanisha! 💖</h2>
+
+        <p>
+            Wishing you a beautiful new beginning and a wonderful new chapter
+            in your life. 🌸
+            <br><br>
+
+            May your future be brighter, your dreams come true,
+            and may Allah bless you with happiness, success,
+            good health and peace. 🤲✨
+            <br><br>
+
+            May your new life be filled with lots of beautiful memories,
+            love, laughter and happiness. 💕
+            <br><br>
+
+            Keep smiling and keep being the amazing person you are! 🌷
+        </p>
+
+    </div>
+
+    <button onclick="showTreat()">
+        🍫 One Last Surprise
+    </button>
+
+</section>
+
+
+<!-- ================= TREAT SCREEN ================= -->
+
+<section id="treatScreen" class="screen treat">
+
+    <div class="chocolate">🍫</div>
+
+    <div class="treatBox">
+
+        <h2>🎁 Your Birthday Treat!</h2>
+
+        <p>
+
+            যেহেতু তুমি আমার ছোট বোন, তাই তোমার জন্য
+            একটা ছোট্ট Birthday Treat আছে। 😂❤️
+
+            <br><br>
+
+            👉 তোমার BF-এর বোনের number আমাকে দিয়ে দাও। 😌
+
+            <br><br>
+
+            <b>
+            Number দিলে তোমাকে ২ টাকার একটা chocolate খাওয়াবো। 🍫😂
+            </b>
+
+            <br><br>
+
+            আর number না দিলে...
+            <br>
+
+            <b>
+            তোমাকে কুকুর দিয়ে কামড় খাওয়ানোর ব্যবস্থা করব। 🐶😂
+            </b>
+
+            <br><br>
+
+            <i>
+            So... তোমার decision! 😎
+            </i>
+
+        </p>
+
+        <button onclick="acceptTreat()">
+            😂 I Accept The Deal
+        </button>
+
+        <div id="accepted" class="hidden">
+            <h2 style="margin-top:25px;">
+                🍫😂 Deal Accepted!
+            </h2>
+
+            <p>
+                এখন chocolate-এর জন্য প্রস্তুত হও! 😎❤️
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ---------- SCREEN SWITCH ---------- */
+
+function changeScreen(current, next){
+
+    document.getElementById(current).classList.remove("active");
+
+    setTimeout(function(){
+
+        document.getElementById(next).classList.add("active");
+
+    },150);
+
+}
+
+
+/* ---------- LOVE → EGG ---------- */
+
+function showEgg(){
+
+    changeScreen("loveScreen","eggScreen");
+
+}
+
+
+/* ---------- EGG → BABY ---------- */
+
+function breakEgg(){
+
+    const egg = document.querySelector(".egg");
+
+    egg.style.animation = "none";
+
+    egg.innerHTML = "💥";
+
+    egg.style.fontSize = "100px";
+    egg.style.display = "flex";
+    egg.style.justifyContent = "center";
+    egg.style.alignItems = "center";
+
+    setTimeout(function(){
+
+        changeScreen("eggScreen","babyScreen");
+
+        createConfetti();
+
+    },800);
+
+}
+
+
+/* ---------- BABY → BIRTHDAY ---------- */
+
+function showBirthday(){
+
+    changeScreen("babyScreen","birthdayScreen");
+
+    createConfetti();
+
+}
+
+
+/* ---------- BIRTHDAY → TREAT ---------- */
+
+function showTreat(){
+
+    changeScreen("birthdayScreen","treatScreen");
+
+}
+
+
+/* ---------- ACCEPT TREAT ---------- */
+
+function acceptTreat(){
+
+    document.getElementById("accepted").classList.remove("hidden");
+
+    createConfetti();
+
+}
+
+
+/* ---------- CONFETTI ---------- */
+
+function createConfetti(){
+
+    const symbols=["🎉","✨","💖","💕","🎊","⭐","❤️","🍫"];
+
+    for(let i=0;i<70;i++){
+
+        const confetti=document.createElement("div");
+
+        confetti.className="confetti";
+
+        confetti.innerHTML=
+            symbols[Math.floor(Math.random()*symbols.length)];
+
+        confetti.style.left=Math.random()*100+"%";
+
+        confetti.style.animationDuration=
+            (2+Math.random()*3)+"s";
+
+        confetti.style.fontSize=
+            (12+Math.random()*20)+"px";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(()=>{
+            confetti.remove();
+        },5000);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
